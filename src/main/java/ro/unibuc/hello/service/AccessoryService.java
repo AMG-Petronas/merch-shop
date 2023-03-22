@@ -20,11 +20,21 @@ public class AccessoryService {
         List<AccessoryEntity> entities = accessoryRepository.findAll();
 
         if (entities.isEmpty()) {
-            throw new EntityNotFoundException("Accessory");
+            throw new EntityNotFoundException();
         }
         return entities.stream()
                 .map(entity -> new Accessory(entity.id, entity.name, entity.description, entity.colour, entity.driver, entity.price))
                 .collect(Collectors.toList());
+    }
+    
+    public Accessory getAccessory(String id) throws EntityNotFoundException {
+        Optional<AccessoryEntity> entity = accessoryRepository.findById(id);
+        
+        if (entity.isEmpty()) {
+            throw new EntityNotFoundException(id);
+        }
+        AccessoryEntity entityValue = entity.get();
+        return new Accessory(entityValue.id, entityValue.name, entityValue.description, entityValue.colour, entityValue.driver, entityValue.price);
     }
 
     public boolean addAccessory(Accessory accessory) {

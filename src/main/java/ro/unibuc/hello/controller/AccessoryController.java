@@ -34,6 +34,10 @@ public class AccessoryController {
         return accessoryService.getAccessories();
     }
 
+    @GetMapping("/accessory/{id}")
+    @ResponseBody
+    public Accessory getAccessory(@PathVariable String id) { return accessoryService.getAccessory(id); }
+
     @PostMapping("/accessory")
     public void addAccessory(@RequestBody Accessory accessory, HttpServletResponse response) {
         boolean wasAccessoryAdded = accessoryService.addAccessory(accessory);
