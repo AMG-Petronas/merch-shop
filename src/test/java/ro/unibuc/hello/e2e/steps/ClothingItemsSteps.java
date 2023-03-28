@@ -1,8 +1,4 @@
 package ro.unibuc.hello.e2e.steps;
-
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -24,16 +20,16 @@ import static org.hamcrest.Matchers.is;
 
 @CucumberContextConfiguration
 @SpringBootTest()
-public class HelloWorldSteps {
+public class ClothingItemsSteps {
 
     public static ResponseResults latestResponse = null;
 
     @Autowired
     protected RestTemplate restTemplate;
 
-    @Given("^the client calls /hello-world")
-    public void the_client_issues_GET_hello() {
-        executeGet("http://localhost:8080/hello-world");
+    @Given("^the client calls /clothes")
+    public void the_client_issues_GET_clothes() {
+        executeGet("http://localhost:8080/clothes");
     }
 
     @Then("^the client receives status code of (\\d+)$")
@@ -43,10 +39,9 @@ public class HelloWorldSteps {
     }
 
     @And("^the client receives response (.+)$")
-    public void the_client_receives_response(String response) throws JsonProcessingException {
+    public void the_client_receives_response(String response) {
         String latestResponseBody = latestResponse.getBody();
-        Greeting greeting = new ObjectMapper().readValue(latestResponseBody, Greeting.class);
-        assertThat("Response received is incorrect", greeting.getContent(), is(response));
+        assertThat("Response received is incorrect", latestResponseBody, is(response));
     }
 
     public void executeGet(String url) {
