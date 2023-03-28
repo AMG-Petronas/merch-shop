@@ -45,8 +45,8 @@
 //    @And("^the client receives response (.+)$")
 //    public void the_client_receives_response(String response) throws JsonProcessingException {
 //        String latestResponseBody = latestResponse.getBody();
-//        Greeting greeting = new ObjectMapper().readValue(latestResponseBody, Greeting.class);
-//        assertThat("Response received is incorrect", greeting.getContent(), is(response));
+////        Greeting greeting = new ObjectMapper().readValue(latestResponseBody, Greeting.class);
+////        assertThat("Response received is incorrect", greeting.getContent(), is(response));
 //    }
 //
 //    public void executeGet(String url) {
